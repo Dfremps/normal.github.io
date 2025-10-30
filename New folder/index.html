@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Shakmen Mini Shop – simple PWA demo with offline support and installable app experience.">
+  <title>Shakmen — Mini Shop</title>
+  <link rel="stylesheet" href="./styles.css">
+    <link rel="manifest" href="./manifest.json">
+  <link rel="icon" href="./images/icon-192.png" type="image/png">
+  <link rel="apple-touch-icon" href="./images/icon-192.png">
+  <meta name="theme-color" content="#ffffff">
+</head>
+<body>
+  <!-- Header Section -->
+  <header class="site-header">
+    <div class="brand">Shakmen</div>
+    <nav>
+      <button id="homeBtn" class="nav-btn btn btn-secondary" aria-label="Go to Home">Home</button>
+      <button id="installBtn" class="nav-btn btn btn-primary" aria-label="Install Shakmen mobile app">Get Mobile App</button>
+      <button id="cartBtn" class="nav-btn btn btn-secondary cart-button" aria-label="View cart" title="Cart">
+        <span class="cart-icon" aria-hidden="true">🛒</span>
+        <span id="cartCount" class="cart-count" aria-live="polite">0</span>
+      </button>
+    </nav>
+
+    
+
+  </header>
+
+  <!-- Main Product Section -->
+  <main class="container">
+    <section class="products">
+      <!-- Product 1: Shoe -->
+      <article class="product-card" data-name="Classic Runner Shoe" data-price="240" data-about="Step into confidence with these bold black combat boots — a perfect mix of durability, comfort, and street-style attitude. Crafted with smooth, high-quality leather and a strong anti-slip sole, these boots are designed to handle anything from city walks to night adventures. The thick platform adds height and power to your stride, while the classic yellow stitching gives it that iconic, timeless look. Whether you’re dressing up for a stylish outfit or keeping it rugged and edgy, these boots elevate every step. Built to last, easy to clean — the ultimate footwear upgrade!" data-origin="Ghana" data-sizes="7,8,9,10,11,12">
+        <div class="image-wrap">
+          <a class="image-link" href="./images/shoe.jpg" target="_blank" rel="noopener" aria-label="Open image: Classic Runner Shoe">
+            <img src="./images/shoe.jpg" alt="Shoe photo" />
+          </a>
+        </div>
+        <h3 class="product-name">Classic Runner Shoe</h3>
+        <p class="product-price">₵240.00</p>
+        
+      </article>
+
+      <!-- Product 2: Bag -->
+      <article class="product-card" data-name="Everyday Leather Bag" data-price="320" data-about="Upgrade your professional look with this elegant brown leather laptop bag — designed for business minds who value both style and practicality. With a rich, glossy leather finish and detailed craftsmanship, this bag makes a strong first impression wherever you go. It features multiple secure compartments for your laptop, documents, gadgets, and daily essentials — keeping everything organized and within easy reach. The adjustable shoulder strap and comfortable handle give you flexible carry options whether you're heading to the office, school, or a meeting. This is the perfect blend of durability, elegance, and convenience — built for successful individuals." data-origin="Ghana" data-sizes="Small,Medium,Large">
+        <div class="image-wrap">
+          <a class="image-link" href="./images/bag.jpg" target="_blank" rel="noopener" aria-label="Open image: Everyday Leather Bag">
+            <img src="./images/bag.jpg" alt="Bag photo" />
+          </a>
+        </div>
+        <h3 class="product-name">Everyday Leather Bag</h3>
+        <p class="product-price">₵320.00</p>
+        
+      </article>
+
+
+    </section>
+  </main>
+
+  <!-- Footer Section -->
+<footer class="site-footer">
+   <p>Designed & Developed by: David Kojo Frempong</p>
+  <p>Phone: +233 548 645 207 | WhatsApp: +233 555 505 866 | Accra, Ghana </p>
+  <p>Email: maxwellblankson50@gmail.com</p>
+</footer>
+
+  <!-- Cart Drawer -->
+  <div id="cartOverlay" class="cart-overlay" aria-hidden="true"></div>
+  <aside id="cartDrawer" class="cart-drawer" aria-labelledby="cartTitle" aria-hidden="true" role="dialog">
+    <header class="cart-drawer-header">
+      <h2 id="cartTitle">Your Cart</h2>
+      <button id="closeCart" class="btn btn-secondary" aria-label="Close cart">Close</button>
+    </header>
+    <div id="cartItems" class="cart-items"></div>
+    <footer class="cart-drawer-footer">
+      <div class="cart-total-row">
+        <span>Total</span>
+        <strong id="cartTotal">₵0.00</strong>
+      </div>
+      <div class="cart-actions">
+        <button id="clearCart" class="btn btn-secondary" aria-label="Clear cart">Clear Cart</button>
+        <button id="checkoutBtn" class="btn btn-primary" aria-label="Proceed to checkout">Checkout</button>
+      </div>
+    </footer>
+  </aside>
+
+  <!-- Product Details Modal -->
+  <div id="detailsOverlay" class="details-overlay" aria-hidden="true"></div>
+  <section id="detailsModal" class="details-modal" role="dialog" aria-modal="true" aria-labelledby="detailsTitle" aria-hidden="true">
+    <button id="detailsClose" class="details-close" aria-label="Close details">✕</button>
+    <div class="details-body">
+      <div class="details-media">
+        <img id="detailsImage" src="" alt="Product image">
+      </div>
+      <div class="details-info">
+        <h3 id="detailsTitle" class="details-name"></h3>
+        <p id="detailsPrice" class="details-price"></p>
+        <div class="details-rows">
+          <div class="details-row"><span>About:</span><span id="detailsAbout"></span></div>
+          <div class="details-row"><span>Size:</span><select id="detailsSizeSelect" class="details-select" aria-label="Choose size"></select></div>
+          <div class="details-row"><span>Origin:</span><span id="detailsOrigin"></span></div>
+        </div>
+      <div class="cart-row">
+        <div class="qty-controls" aria-label="Select quantity">
+          <button id="modalQtyMinus" class="qty-btn" aria-label="Decrease quantity" type="button">−</button>
+          <input id="modalQtyInput" class="qty-input" type="text" value="1" inputmode="numeric" aria-live="polite" aria-label="Quantity" readonly>
+          <button id="modalQtyPlus" class="qty-btn" aria-label="Increase quantity" type="button">+</button>
+        </div>
+        <button id="modalAddBtn" class="add-btn" aria-label="Add item to cart">Add to Cart</button>
+      </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Script File (moved to bottom so elements above exist) -->
+  <script src="./script.js"></script>
+</body>
+</html>
+
